@@ -168,7 +168,8 @@ def fof_to_halos(fileprefix,opts={'pos':True,'vel':True,'mass':True}):
  
       if header['Ngroups_ThisFile'] > 0:
         if opts.get('pos'): pos += [np.array(f['Group/GroupPos'])]
-        if opts.get('vel'): vel += [np.array(f['Group/GroupVel']) * np.sqrt(ScaleFactor)]
+        # if opts.get('vel'): vel += [np.array(f['Group/GroupVel']) * np.sqrt(ScaleFactor)]
+        if opts.get('vel'): vel += [np.array(f['Group/GroupVel'])]
         if opts.get('mass'): mass += [np.array(f['Group/GroupMass'])]
 
     fileinst += 1
@@ -426,7 +427,8 @@ def subhalo_tracing_data(snapshot_number,subhalo_number):
 
         # get some data for the subhalo
         pos = np.array(f['Subhalo/SubhaloPos'])[index]
-        vel = np.array(f['Subhalo/SubhaloVel'])[index] * np.sqrt(ScaleFactor)
+        # vel = np.array(f['Subhalo/SubhaloVel'])[index] * np.sqrt(ScaleFactor)
+        vel = np.array(f['Subhalo/SubhaloVel'])[index]
         ID = {'group':np.array(f['Subhalo/SubhaloGroupNr'])[index],
           'subhalo':subhalo_number,
           'particle':np.array(f['Subhalo/SubhaloIDMostbound'])[index]}
@@ -796,7 +798,8 @@ def group_data(fileprefix,group,size_definition='Mean200',opts={'pos':True,'vel'
         index = group - hinst
 
         pos = np.array(f['Group/GroupPos'])[index]
-        vel = np.array(f['Group/GroupVel'])[index] * np.sqrt(ScaleFactor)
+        # vel = np.array(f['Group/GroupVel'])[index] * np.sqrt(ScaleFactor)
+        vel = np.array(f['Group/GroupVel'])[index]
         radius = np.array(f['Group/Group_R_'+size_definition])[index]
         mass = np.array(f['Group/Group_M_'+size_definition])[index]
 
@@ -1244,7 +1247,8 @@ def read_subhalos(fileprefix, opts={'pos':True,'vel':True,'mass':True,'radius':F
         if opts.get('pos'):
           pos += [np.array(f['Subhalo/SubhaloPos'])]
         if opts.get('vel'):
-          vel += [np.array(f['Subhalo/SubhaloVel']) * np.sqrt(ScaleFactor)]
+          # vel += [np.array(f['Subhalo/SubhaloVel']) * np.sqrt(ScaleFactor)]
+          vel += [np.array(f['Subhalo/SubhaloVel'])]
         if opts.get('mass'):
           mass += [np.array(f['Subhalo/SubhaloMass'])]
         if opts.get('radius'):
@@ -1267,7 +1271,8 @@ def read_subhalos(fileprefix, opts={'pos':True,'vel':True,'mass':True,'radius':F
         if group_opts.get('pos'):
           group_pos += [np.array(f['Group/GroupPos'])]
         if group_opts.get('vel'):
-          group_vel += [np.array(f['Group/GroupVel']) * np.sqrt(ScaleFactor)]
+          # group_vel += [np.array(f['Group/GroupVel']) * np.sqrt(ScaleFactor)]
+          group_vel += [np.array(f['Group/GroupVel'])]
         if group_opts.get('mass'):
           group_mass += [np.array(f['Group/GroupMass'])]
         if group_opts.get('somass'):
