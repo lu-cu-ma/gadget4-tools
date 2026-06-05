@@ -14,7 +14,7 @@ for filepath in files:
         data2 = f["PartType2/Coordinates"][:]  # type 2 particle data (disk particles)
 
     # coordinates of type 1 particles (dark matter)
-    x = data1[:,0]
+    x = data1[:,0]    # x coordinates for all dark matter particles
     y = data1[:,1]
     z = data1[:,2]
     
@@ -24,10 +24,12 @@ for filepath in files:
     z2 = data2[:,2]
 
     # color by particle density
-    xyz = np.vstack([x2, y2, z2])
-    kde = gaussian_kde(xyz)
-    density = kde(xyz)
+    xyz = np.vstack([x2, y2, z2])   # create a matrix which line 1 is x2, line 2 is y2 and line 3 is z2
+    kde = gaussian_kde(xyz)         # Kernel Density Estimator: each particle is replaced by a small 3D Gaussian "blob" centered on its position. 
+                                    #The KDE adds together all those blobs to create a continuous density field.
+    density = kde(xyz)              #List of density of each particle 
     
+
     # sorting points so low-density ones are plotted first
     idx = density.argsort()
     X, Y, Z, density = x2[idx], y2[idx], z2[idx], density[idx]  # defining positions of disk particles
