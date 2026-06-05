@@ -5,6 +5,8 @@ from snapshot_functions import gadget_to_particles, cic_bin
 
 cmap = cm.viridis
 
+#snapshot = '/home/suz/gadget4/output/G2_galaxy/snapshot_001.hdf5'
+
 def run(argv):
   
   if len(argv) < 3:
